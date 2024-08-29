@@ -1,5 +1,6 @@
 import antfu from '@antfu/eslint-config';
 import nextPlugin from '@next/eslint-plugin-next';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 import jestDom from 'eslint-plugin-jest-dom';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -24,7 +25,7 @@ export default antfu({
     'migrations/**/*',
     'next-env.d.ts',
   ],
-}, jsxA11y.flatConfigs.recommended, {
+}, jsxA11y.flatConfigs.recommended, ...pluginQuery.configs['flat/recommended'], {
   plugins: {
     '@next/next': nextPlugin,
   },
