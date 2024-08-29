@@ -1,3 +1,4 @@
+import { CssBaseline } from '@mui/material';
 import Container from '@mui/material/Container';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -20,7 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Container maxWidth="md">
+          <CssBaseline />
+          <Container maxWidth="md" sx={{ marginY: 2 }}>
             {children}
           </Container>
         </Providers>

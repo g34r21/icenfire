@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -13,7 +13,12 @@ const Houses = () => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const handlePaginationModelChange = ({ page }: { page: number; pageSize: number }) => {
+  const handlePaginationModelChange = ({
+    page,
+  }: {
+    page: number;
+    pageSize: number;
+  }) => {
     const params = new URLSearchParams(searchParams);
     params.set('page', (page + 1).toString());
     replace(`${pathname}?${params.toString()}`);
@@ -28,13 +33,11 @@ const Houses = () => {
 
   return (
     <DataGrid
-      rows={
-        data?.pageResults.map(house => ({
-          id: house.id,
-          name: house.name,
-          link: `/houses/${house.id}/members`,
-        }))
-      }
+      rows={data?.pageResults.map(house => ({
+        id: house.id,
+        name: house.name,
+        link: `/houses/${house.id}/members`,
+      }))}
       disableRowSelectionOnClick
       disableColumnSelector
       disableColumnSorting
@@ -42,7 +45,15 @@ const Houses = () => {
       disableColumnResize
       disableColumnMenu
       columns={[
-        { field: 'name', headerName: 'House name', flex: 3 },
+        {
+          field: 'name',
+          renderHeader: () => (
+            <Typography variant="h6" fontWeight="bold">
+              House name
+            </Typography>
+          ),
+          flex: 3,
+        },
         {
           field: 'link',
           flex: 1,
@@ -60,6 +71,11 @@ const Houses = () => {
       paginationMode="server"
       rowCount={data?.totalCount || 10}
       pagination
+      initialState={{
+        pagination: {
+          paginationModel: { pageSize: 10, page: currentPage - 1 },
+        },
+      }}
       loading={isLoading}
       pageSizeOptions={[10]}
       slotProps={{
@@ -68,7 +84,6 @@ const Houses = () => {
           noRowsVariant: 'skeleton',
         },
       }}
-      paginationModel={{ page: currentPage - 1, pageSize: 10 }}
       onPaginationModelChange={handlePaginationModelChange}
     />
   );

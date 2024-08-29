@@ -1,8 +1,10 @@
+import { Typography } from '@mui/material';
+
 import Houses from '@/components/HousesTable';
 
 const HousesPage = () => (
   <>
-    <h1>Houses</h1>
+    <Typography variant="h3" sx={{ marginY: 8 }}>Houses</Typography>
     <Houses />
   </>
 );
