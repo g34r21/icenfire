@@ -1,3 +1,4 @@
+import Container from '@mui/material/Container';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          {children}
+          <Container maxWidth="md">
+            {children}
+          </Container>
         </Providers>
       </body>
     </html>
