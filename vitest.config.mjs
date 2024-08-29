@@ -13,6 +13,7 @@ export default defineConfig({
       reporter: ['html'],
       setupFiles: ['./vitest-setup.ts'],
     },
+    setupFiles: ['./vitest-setup.ts'],
     environmentMatchGlobs: [['**/*.test.tsx', 'jsdom']],
   },
 });
